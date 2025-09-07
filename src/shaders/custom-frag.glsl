@@ -12,6 +12,7 @@
 precision highp float;
 
 uniform vec4 u_Color; // The color with which to render this instance of geometry.
+uniform vec4 u_Color2;
 
 // These are the interpolated values out of the rasterizer, so you can't know
 // their specific values without knowing the vertices that contributed to them
@@ -30,10 +31,6 @@ vec3 randomVector(vec3 p) {
         dot(p, vec3(113.5, 271.9, 124.6))
     )) * 4358.5453);
     return normalize(v);
-}
-float random1 (float x) {
-        float f = 43758.5453123;
-        return fract(sin(x) * f);
 }
 
 float surflet(vec3 P, vec3 gridPoint) {
@@ -67,9 +64,9 @@ float perlinNoise(vec3 p) {
 
 float fbm(vec3 p) {
 
-    int octaves = 3;
+    int octaves = 2;
     float amplitude = 0.5;
-    float frequency = 1.0;
+    float frequency = 2.0;
     float persistence = 0.8f;
 
     float total = 0.0;
@@ -98,8 +95,9 @@ void main()
                                                         //lit by our point light are not completely black.
 
     float distVal = clamp(fs_Pos.z + 0.5, 0.05, 1.0);
-    float fbmVal = fbm(vec3(fs_Pos) + vec3(0, 3, 0));
-    vec3 newCol = mix(u_Color.rgb * distVal, u_Color.rgb * 0.05, smoothstep(fbmVal, -0.33, 0.0));
+    float fbmVal = smoothstep(fbm(vec3(fs_Pos) + vec3(0, 3, 0)), -0.35, 0.0);
+    float lerpVal = max(distVal, fbmVal);
+    vec3 newCol = mix(u_Color.rgb, u_Color2.rgb, lerpVal);
 
     out_Col = vec4(newCol, u_Color.a);
 }

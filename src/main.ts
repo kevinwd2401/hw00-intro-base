@@ -15,9 +15,9 @@ import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
 const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
-  shaderColor: [255, 0, 0]
-};
-
+  shaderColor: [255, 0, 0],
+  shaderColor2: [255, 0, 0]
+}
 // let icosphere: Icosphere;
 // let square: Square;
 let cube: Cube;
@@ -47,6 +47,7 @@ function main() {
   gui.add(controls, 'tesselations', 0, 8).step(1);
   gui.add(controls, 'Load Scene');
   gui.addColor(controls, 'shaderColor');
+  gui.addColor(controls, 'shaderColor2');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -90,6 +91,7 @@ function main() {
       //icosphere,
       //square,
     ], vec4.fromValues(controls.shaderColor[0] / 255.0, controls.shaderColor[1]/ 255.0, controls.shaderColor[2]/ 255.0, 1),
+      vec4.fromValues(controls.shaderColor2[0] / 255.0, controls.shaderColor2[1]/ 255.0, controls.shaderColor2[2]/ 255.0, 1), 
       currTime);
     stats.end();
 

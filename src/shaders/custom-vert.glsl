@@ -47,9 +47,9 @@ void main()
                                                             // the model matrix.
 
     vec3 offsetVector = vec3(cos(radians(float(u_Time))), sin(radians(float(u_Time))), 0); // vector that rotates around z axis
-    float dotOffset = abs(dot(offsetVector, vec3(vs_Pos))) * 0.1; // dot of position vector from offsetVector
-    float sinOffset = tan(radians(float(u_Time))) * 0.2;
-    vec3 newPos = (1.0 + dotOffset) * vec3(vs_Pos) + sinOffset * vec3(0, 0, 1);
+    float dotOffset = abs(dot(offsetVector, vec3(vs_Pos))) * 0.2; // dot of position vector from offsetVector
+    float tanOffset = tan(radians(float(u_Time))) * 0.2;
+    vec3 newPos = (1.0 + dotOffset) * vec3(vs_Pos) + tanOffset * vec3(0, 0, -1);
     fs_Pos = vec4(newPos, 1);
     vec4 modelposition = u_Model * vec4(newPos, 1);  // Temporarily store the transformed vertex positions for use below
 
