@@ -67,17 +67,17 @@ float perlinNoise(vec3 p) {
 
 float fbm(vec3 p) {
 
-    int octaves = 5;
+    int octaves = 3;
     float amplitude = 0.5;
     float frequency = 1.0;
-    float persistence = 0.5f;
+    float persistence = 0.8f;
 
     float total = 0.0;
 
     for (int i = 0; i < octaves; i++) {
         total += amplitude * perlinNoise(p * frequency);
 
-        frequency *= 1.5;
+        frequency *= 1.66;
         amplitude *= persistence;
     }
     return total;
@@ -99,7 +99,7 @@ void main()
 
     float distVal = clamp(fs_Pos.z + 0.5, 0.05, 1.0);
     float fbmVal = fbm(vec3(fs_Pos) + vec3(0, 3, 0));
-    vec3 newCol = mix(u_Color.rgb * distVal, u_Color.rgb * 0.05, smoothstep(fbmVal, -0.3, 0.0));
+    vec3 newCol = mix(u_Color.rgb * distVal, u_Color.rgb * 0.05, smoothstep(fbmVal, -0.33, 0.0));
 
     out_Col = vec4(newCol, u_Color.a);
 }
