@@ -7,8 +7,8 @@
 
 ## Submission Description
 
-![](cube1.PNG)
-![](watermelon.PNG)
+![](cube1.png)
+![](watermelon.png)
 
 The vertex shader shifts vertex positions from the center non-uniformly based on dot product with a vector that uses trig functions and u_Time. The cube is then made to move with a smooth sliding transition using tan function for all vertices. The fragment shader sets the main color of the cube as u_Color and lerps to a second chosen color based on z coordinate and perlin noise.
 
