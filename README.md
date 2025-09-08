@@ -12,6 +12,8 @@
 
 The vertex shader shifts vertex positions from the center non-uniformly based on dot product with a vector that uses trig functions and u_Time. The cube is then made to move with a smooth sliding transition using tan function for all vertices. The fragment shader sets the main color of the cube as u_Color and lerps to a second chosen color based on z coordinate and perlin noise.
 
+Website Demo: https://kevinwd2401.github.io/hw00-intro-base/
+
 ## Objective
 - Check that the tools and build configuration we will be using for the class works.
 - Start learning Typescript and WebGL2
